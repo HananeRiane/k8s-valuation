@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-redis-hanane
+  labels:
+    app: node-redis-hanane
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-redis-hanane
+  template:
+    metadata:
+      labels:
+        app: node-redis-hanane
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: node-redis-hanane
+          image: cloud.canister.io:5000/arhturescriou/node-redis
+          ports:
+            - containerPort: 5000
+          env:
+            - name: PORT
+              value: "5000"
+            - name: REDIS_URL
+              value: "redis://redis-service-hanane:6379"

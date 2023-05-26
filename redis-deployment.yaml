@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-hanane
+  labels:
+    app: redis-hanane
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: redis-hanane
+  template:
+    metadata:
+      labels:
+        app: redis-hanane
+    spec:
+      containers:
+        - name: redis-hanane
+          image: redis
+          ports:
+            - containerPort: 6379
